@@ -1,0 +1,4 @@
+.env
+orders.sqlite3
+__pycache__/
+*.pyc
