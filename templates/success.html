@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% if paid %}Your letter is ready{% else %}Checking payment{% endif %} | Santa's Magical Mail</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 80% 10%,#2b6455,transparent 40%),#103b32;color:#263b32;font:16px/1.6 system-ui,Arial,sans-serif;display:grid;place-items:center;padding:26px}
+main{width:min(580px,100%);background:#fffbf2;border:5px double #d9b675;border-radius:15px;padding:clamp(24px,6vw,52px);text-align:center;box-shadow:0 18px 60px #0003}h1{font-family:Georgia,serif;font-size:clamp(30px,6vw,42px);line-height:1.2;color:#174b40}p{margin:0 0 18px}.star{font-size:52px;color:#bc9143}.btn{display:inline-block;background:#a92f40;color:white;text-decoration:none;padding:13px 22px;border-radius:8px;font-weight:800;margin:10px 6px}.sub{display:block;color:#506b60;font-size:14px;margin-top:18px}a{color:#174b40}
+</style>
+</head>
+<body>
+<main>
+<div class="star">✦</div>
+{% if paid %}
+  <h1>Your Santa letter is ready!</h1>
+  <p>Thank you for bringing a little North Pole magic home. Download your personalized printable PDF below.</p>
+  <a class="btn" href="{{ link }}">Download my Santa letter</a>
+  <span class="sub">Save the PDF to your device and print at home. This is a digital product; nothing is mailed.</span>
+{% else %}
+  <h1>We're checking your payment</h1>
+  <p>Your letter is not available for download yet. If you've just completed checkout, refresh this page after a moment.</p>
+  <span class="sub">Please don't make a second purchase unless you have confirmed the first one failed.</span>
+{% endif %}
+<p style="margin-top:29px"><a href="/">Return to Santa's Magical Mail</a></p>
+</main>
+</body>
+</html>
