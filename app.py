@@ -84,7 +84,8 @@ def order():
     data=(oid,token,child,field('age',3),field('accomplishment',180),field('wish',120),recipient,email,field('address',250),datetime.now(timezone.utc).isoformat())
     with db() as c:c.execute('INSERT INTO orders(id,token,child,age,accomplishment,wish,recipient,email,postal_address,created) VALUES (?,?,?,?,?,?,?,?,?,?)',data)
     if request.form.get('sample')=='yes':return redirect(url_for('preview',token=token))
-    key=os.environ.get('STRIPE_SECRET_KEY');domain=os.environ.get('PUBLIC_BASE_URL','').rstrip('/')
+        key = os.environ.get('STRIPE_SECRET_KEY')
+    domain = 'https://santas-magical-mail-vhrj.onrender.com'
     if not key or not domain:return 'Checkout is not configured. Set STRIPE_SECRET_KEY and PUBLIC_BASE_URL. You can still use the sample preview.',503
     try:
         import stripe
@@ -123,8 +124,8 @@ def success():
     # Verify directly with Stripe as well as webhook to handle webhook delay
     if not o['paid'] and os.environ.get('STRIPE_SECRET_KEY'):
         import stripe
-        stripe.api_key=os.environ['STRIPE_SECRET_KEY']domain='https://santas-magical-mail-vhrj.onrender.com'
-        try:
+        domain='https://santas-magical-mail-vhrj.onrender.com'
+      stripe.api_key = os.environ['STRIPE_SECRET_KEY']  try:
             s=stripe.checkout.Session.retrieve(sid)
             if s.payment_status=='paid' and s.client_reference_id==o['id']:
                 with db() as c:c.execute('UPDATE orders SET paid=1 WHERE id=?',(o['id'],))
