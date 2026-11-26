@@ -123,7 +123,7 @@ def success():
     # Verify directly with Stripe as well as webhook to handle webhook delay
     if not o['paid'] and os.environ.get('STRIPE_SECRET_KEY'):
         import stripe
-        stripe.api_key=os.environ['STRIPE_SECRET_KEY']
+        stripe.api_key=os.environ['STRIPE_SECRET_KEY']domain='https://santas-magical-mail-vhrj.onrender.com'
         try:
             s=stripe.checkout.Session.retrieve(sid)
             if s.payment_status=='paid' and s.client_reference_id==o['id']:
